@@ -1,0 +1,53 @@
+---
+- name: Update the apt package index and install packages to allow apt to use a repository over HTTPS
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  loop:
+    - curl
+    - unzip
+    - ca-certificates
+    - gnupg
+    - lsb-release
+
+
+- name: Add Dockers official GPG key
+  shell: 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg'
+
+- name: Use the following command to set up the stable repository
+  shell: |
+    'echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+
+- name: Install docker and some dependencies
+  apt:
+    name: python3-pip, docker.io docker-ce
+    state: present
+
+- name: Create the docker group
+  shell: 'groupadd docker'
+
+- name: Add your user to the docker group.
+  shell: 'usermod -aG docker $USER'
+
+- name: Log out and log back in so that your group membership is re-evaluated
+  shell: 'newgrp docker'
+
+- name: Start docker service
+  service:
+    name: docker
+    state: started
+
+- name: Install docker python module
+  pip:
+    name: docker
+
+- name: Create a data container
+  docker_container:
+    name: ubuntu
+    image: ubuntu
+    state: started
+    recreate: yes
+    volumes:
+      - ubuntu:/ubuntu
+    container_default_behavior: "compatibility"
