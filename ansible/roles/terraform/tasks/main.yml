@@ -1,0 +1,20 @@
+---
+
+- name: Update apt cache and make sure, Curl and Unzip are installed
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  loop:
+    - curl
+    - unzip
+
+- name: Apt Install Packages
+  apt: name={{item}} state=latest
+  with_items:
+     - wget
+
+- name: terraform install
+  unarchive:
+    src: https://releases.hashicorp.com/terraform/1.1.5/terraform_1.1.5_linux_amd64.zip
+    dest: /usr/bin
+    remote_src: True

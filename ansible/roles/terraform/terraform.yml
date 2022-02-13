@@ -1,0 +1,5 @@
+- name: run tasks on all hosts
+  hosts: infraestrutura
+  become: yes
+  roles:
+  - terraform
