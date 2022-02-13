@@ -1,5 +1,0 @@
-- name: run tasks on 
-  hosts: infraestrutura
-  become: yes
-  roles:
-  - docker
