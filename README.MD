@@ -25,7 +25,10 @@ host | UNREACHABLE! => {
 
 
 
-> para execução `ansible-playbook -i ansible/hosts docker/tasks/main.yml -u docker -K`
+> para execução **remote** `ansible-playbook -i ansible/hosts docker/tasks/main.yml -K`
+
+
+> para execução **localhost** `ansible-playbook -i docker/hosts docker/docker.yml --connection=local -K`
 
 
 
