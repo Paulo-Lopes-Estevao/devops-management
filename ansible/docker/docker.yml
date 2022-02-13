@@ -1,0 +1,7 @@
+- name: run tasks on 
+  hosts: infraestrutura
+  become: True
+  become_method: sudo
+  become_user: root
+  roles:
+  - docker
