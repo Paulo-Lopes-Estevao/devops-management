@@ -2,9 +2,16 @@
 
 
 
-## ANSIBLE
+#### ANSIBLE
+
+### [Install Ansible]([https://link](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html))
 
 ### Preparação do ambiente
+
+
+## - Docker
+## - Terraform
+
 
 > $ `ansible -i ansible/hosts all -m ping`
 
@@ -25,12 +32,10 @@ host | UNREACHABLE! => {
 
 
 
-> para execução **remote** `ansible-playbook -i ansible/hosts docker/tasks/main.yml -K`
+> para execução **remote** `ansible-playbook -i ansible/hosts ansible/ansible.yml -K`
 
 
-> para execução **localhost** `ansible-playbook -i docker/hosts docker/docker.yml --connection=local -K`
+> para execução **localhost** `ansible-playbook -i ansible/hosts ansible/ansible.yml --connection=local -K`
 
 
-
-
-> para execução `ansible-playbook -i ansible/hosts docker/tasks/main.yml -u docker --vault-password-file=`s
+> para execução `ansible-playbook -i ansible/hosts ansible/ansible.yml --vault-password-file=`s
