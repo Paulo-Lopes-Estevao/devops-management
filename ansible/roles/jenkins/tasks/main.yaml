@@ -1,0 +1,18 @@
+---
+- name: jenkins install
+  community.docker.docker_container:
+    name:  jenkins
+    image:  jenkins/jenkins
+    state: started
+    restart: yes
+    recreate: true
+    restart_policy: on-failure
+    privileged: yes
+    published_ports:
+     - 8086:8080
+     - 50000:50000
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+     
