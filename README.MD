@@ -6,6 +6,10 @@
 
 ### [Install Ansible]([https://link](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html))
 
+> `ansible-galaxy collection install community.general -f`
+
+>`ansible-galaxy collection install community.docker -f`
+
 ### Preparação do ambiente
 
 
